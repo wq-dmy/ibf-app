@@ -25,9 +25,9 @@ import com.sxy.ibf.security.oauth2.JwtGrantedAuthorityConverter;
 import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import(SecurityProblemSupport.class)
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+//@Import(SecurityProblemSupport.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Value("${spring.security.oauth2.client.provider.oidc.issuer-uri}")

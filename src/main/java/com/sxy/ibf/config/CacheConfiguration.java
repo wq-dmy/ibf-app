@@ -20,8 +20,8 @@ import javax.cache.expiry.Duration;
 
 import io.github.jhipster.config.JHipsterProperties;
 
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class CacheConfiguration {
 
     @Bean

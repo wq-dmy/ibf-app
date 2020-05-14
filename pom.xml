@@ -6,7 +6,7 @@
     <groupId>com.sxy.ibf</groupId>
     <artifactId>ibfapi</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>Ibfapi</name>
 
     <repositories>
@@ -21,6 +21,7 @@
 
     <properties>
         <!-- Build properties -->
+        <start-class>com.sxy.ibf.IbfapiApp</start-class>
         <maven.version>3.3.9</maven.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -93,6 +94,57 @@
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
+        </dependency>
+
+        <!-- 数据库驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- 连接池 -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+        <!-- mybatis-plus  -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
+        <!-- 实体辅助 get/set 工具-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- 代码生成模块 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>3.3.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- 老版授权 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
@@ -811,18 +863,6 @@
         </profile>
         <profile>
             <!--
-                Profile for tracing requests with Zipkin.
-            -->
-            <id>zipkin</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-zipkin</artifactId>
-                </dependency>
-            </dependencies>
-        </profile>
-        <profile>
-            <!--
                 Profile for applying IDE-specific configuration.
                 At the moment it configures MapStruct and Hibernate JPA Metamodel Generator, which you need when working
                 with DTOs and entity filtering.
@@ -834,61 +874,6 @@
                     <artifactId>mapstruct-processor</artifactId>
                 </dependency>
             </dependencies>
-        </profile>
-        <profile>
-            <!-- This is automatically activated when working in Eclipse -->
-            <id>eclipse</id>
-            <activation>
-                <property>
-                    <name>m2e.version</name>
-                </property>
-            </activation>
-            <dependencies>
-                <!-- The following dependency is added due to issue #9175-->
-                <dependency>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-undertow</artifactId>
-                </dependency>
-            </dependencies>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <!--
-                            This plugin's configuration is used to store Eclipse m2e settings only.
-                            It has no influence on the Maven build itself.
-                            Remove when the m2e plugin can correctly bind to Maven lifecycle
-                        -->
-                        <plugin>
-                            <groupId>org.eclipse.m2e</groupId>
-                            <artifactId>lifecycle-mapping</artifactId>
-                            <version>${lifecycle-mapping.version}</version>
-                            <configuration>
-                                <lifecycleMappingMetadata>
-                                    <pluginExecutions>
-                                        <pluginExecution>
-                                            <pluginExecutionFilter>
-                                                <groupId>org.jacoco</groupId>
-                                                <artifactId>
-                                                    jacoco-maven-plugin
-                                                </artifactId>
-                                                <versionRange>
-                                                    ${jacoco-maven-plugin.version}
-                                                </versionRange>
-                                                <goals>
-                                                    <goal>prepare-agent</goal>
-                                                </goals>
-                                            </pluginExecutionFilter>
-                                            <action>
-                                                <ignore/>
-                                            </action>
-                                        </pluginExecution>
-                                    </pluginExecutions>
-                                </lifecycleMappingMetadata>
-                            </configuration>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
         </profile>
         <!-- jhipster-needle-maven-add-profile -->
     </profiles>

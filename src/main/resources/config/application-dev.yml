@@ -39,13 +39,8 @@ spring:
     consul:
       discovery:
         prefer-ip-address: true
-      host: localhost
+      host: 192.168.3.223
       port: 8500
-  mail:
-    host: localhost
-    port: 25
-    username:
-    password:
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:
@@ -54,15 +49,64 @@ spring:
     sampler:
       probability: 1 # report 100% of traces
   zipkin: # Use the "zipkin" Maven profile to have the Spring Cloud Zipkin dependencies
-    base-url: http://localhost:9411
+    base-url: http://192.168.3.223:9411
     enabled: false
     locator:
       discovery:
         enabled: true
+  # 数据源配置
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.3.222:16609/ibfdb_dev?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: ibfuser
+    password: aWJkcGFzcwo
+    # Hikari 连接池配置
+    # 最小空闲连接数量
+    hikari:
+      minimum-idle: 5
+      # 空闲连接存活最大时间，默认600000（10分钟）
+      idle-timeout: 180000
+      # 连接池最大连接数，默认是10
+      maximum-pool-size: 10
+      # 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      # 连接池名称
+      pool-name: IbfHikariCP
+      # 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认30分钟
+      max-lifetime: 600000
+      # 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+# mybatis plus配置
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_empty
+      table-underline: true #
+      db-type: mysql
+  mapper-locations: classpath*:/mybatis/**/*Mapper.xml
 
 server:
   port: 19983
+  # 请求头部大写修改限制 erp 授权
+  max-http-header-size: 1024000
 
+# ERP 授权配置信息
+oauth2:
+  signature-verification:
+      public-key-endpoint-uri: http://sibeuaaapi/oauth/token_key
+      public-key-refresh-rate-limit: 10000
+      ttl: 3600000
+  web-client-configuration:
+      client-id: web_app
+      secret: changeit
 # ===================================================================
 # JHipster specific properties
 #
@@ -70,24 +114,6 @@ server:
 # ===================================================================
 
 jhipster:
-  cache: # Cache configuration
-    redis: # Redis configuration
-      expiration: 3600 # By default objects stay 1 hour (in seconds) in the cache
-      server: redis://localhost:6379
-      cluster: false
-      # server: redis://localhost:6379,redis://localhost:16379,redis://localhost:26379
-      # cluster: true
-  # CORS is disabled by default on microservices, as you should access them through a gateway.
-  # If you want to enable it, please uncomment the configuration below.
-  # cors:
-  #     allowed-origins: "*"
-  #     allowed-methods: "*"
-  #     allowed-headers: "*"
-  #     exposed-headers: "Authorization,Link,X-Total-Count"
-  #     allow-credentials: true
-  #     max-age: 1800
-  mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://127.0.0.1:19983
   metrics:
     logs: # Reports metrics in the logs
       enabled: false

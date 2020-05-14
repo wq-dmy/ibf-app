@@ -34,7 +34,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class AuthorizationHeaderUtil {
 
     private final OAuth2AuthorizedClientService clientService;

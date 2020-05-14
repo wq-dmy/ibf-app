@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
-@Component
+//@Component
 public class JwtGrantedAuthorityConverter implements Converter<Jwt, Collection<GrantedAuthority>> {
 
     public JwtGrantedAuthorityConverter() {
