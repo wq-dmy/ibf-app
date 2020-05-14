@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.sxy.ibf"
+    },
+    "jhipsterVersion": "6.8.0",
+    "applicationType": "microservice",
+    "baseName": "ibfapi",
+    "packageName": "com.sxy.ibf",
+    "packageFolder": "com/sxy/ibf",
+    "serverPort": "19983",
+    "authenticationType": "oauth2",
+    "cacheProvider": "redis",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "no",
+    "devDatabaseType": "no",
+    "prodDatabaseType": "no",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "consul",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NTQwZGRhYjg0MWQxZGZlYmZhNGEyM2QwYTY2NTQ1MjZlMGEyNWQxMjliZWViNDc5NTYzZWEwYjcyZWEzMzQ4Y2EyZWJlN2U5ZjIyZTc5ZmM5NzliOTZkODVhMDk0YzZhNGZlZDZhOWYwZDZlMDVhZGVjNzc2NDA4MGM1NmUwMTg=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1589441644212,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
